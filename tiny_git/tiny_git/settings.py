@@ -122,6 +122,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = BASE_DIR / 'media' #full path to a directory  where would like django to save the media files
+MEDIA_URL = '/media/' #how to access image in browser /media/profile_pics/default.jpg for example
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'git-home'
