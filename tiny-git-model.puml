@@ -1,0 +1,108 @@
+@startuml
+
+class Project {
+    name: string
+    description: string
+    git_repository: string
+    owner: User
+}
+
+class Issue {
+    title: string
+    author: User
+    creation_time: timestamp
+}
+
+Project *-- "0..*" Issue
+
+class Milestone {
+    title: string
+    due_date: timestamp
+    description: string
+}
+
+Project *--"0..*" Milestone
+
+class Label {
+    name: string
+    description: string
+    color: string
+}
+
+Project *--"0..*" Label
+
+class User {
+    username: string
+    email: EMail
+    password: string
+}
+
+Project "0..*"--"0..*" User: collaborators
+
+class Profile {
+    image: Image
+}
+
+User *--"0..1" Profile
+
+class Event {
+    creation_time: timestamp
+    author: User
+}
+
+Issue *--"1..*" Event
+
+class Comment {
+    text: string
+}
+
+Event <|-- Comment
+
+class UpdateIssueStatus {
+    new_status: IssueStatus
+}
+
+Event <|-- UpdateIssueStatus
+
+class UpdateComment {
+    new_comment: Comment
+}
+
+Event <|-- UpdateComment
+
+class UpdateMilestone {
+    new_milestone: Milestone
+    new_status: MilestoneStatus
+}
+
+Event <|-- UpdateMilestone
+
+class UpdateLabel {
+    new_label: Label
+}
+
+Event <|-- UpdateLabel
+
+class UpdateAssignee {
+    new_assignee: User
+}
+
+Event <|-- UpdateAssignee
+
+class UpdateCode {
+    url: URL
+}
+
+Event <|-- UpdateCode
+
+enum IssueStatus {
+    OPEN,
+    CLOSED
+}
+
+enum MilestoneStatus {
+    OPEN,
+    CLOSED
+}
+
+@enduml
