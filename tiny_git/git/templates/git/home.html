@@ -1,4 +1,18 @@
 {% extends "git/base.html" %}
 {% block content %}
-    <h1>Welcome to the <i>TINY GIT</i></h1>
+    <h1><i>Projects</i></h1>
+    {% for project in projects %}
+        <article class="media content-section">
+        <img class="rounded-circle article-img" src="{{ project.owner.profile.image.url }}">
+          <div class="media-body">
+            <div class="article-metadata">
+              <span><i>owner: </i></span><a class="mr-2" href="#">{{ project.owner }}</a>
+            </div>
+            <h2><a class="article-title" href="{% url 'project-detail' project.id %}">{{ project.name }}</a></h2>
+            <p class="article-content"><i>{{ project.description }}</i></p>
+            <a class="mr-2" href="{{ project.git_repository}}">View in GitHub</a>
+          </div>
+        </article>
+    {% endfor %}
 {% endblock content %}
+
